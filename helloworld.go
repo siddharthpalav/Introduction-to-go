@@ -2,19 +2,107 @@ package main
 
 import "fmt"
 
+type Product struct {
+	name    string
+	price   int
+	company string
+}
+
+type SellableProduct interface {
+	buy()
+	getDiscount() int
+}
+
+func newProduct(name string, price int, company string) *Product {
+	p := Product{
+		name:    name,
+		price:   price,
+		company: company,
+	}
+	return &p
+}
+
+func fun(copyOfP Product) {
+	copyOfP.name = "Macbook Pro"
+}
+
+func fun_pass_by_ref(p *Product) {
+	p.name = "MacBook Pro"
+}
+
+func (p *Product) display(short bool) {
+	if short {
+		fmt.Println("Product: ", p.name, " Price: ", p.price)
+		return
+	}
+	fmt.Println("Product details: ")
+	fmt.Println("Name: ", p.name)
+	fmt.Println("Price: ", p.price)
+	fmt.Println("Company: ", p.company)
+}
+
+func (p *Product) buy() {
+	fmt.Println("Buying product: ", p.name, " for price: ", p.price)
+}
+
+func (p *Product) getDiscount() int {
+	discount := p.price * 20 / 100
+	fmt.Println("Discount for product ", p.name, " is ", discount)
+	return discount
+}
+
+func check_discount_and_buy(p SellableProduct) {
+	discount := p.getDiscount()
+	if discount > 30 {
+		fmt.Println("Discount is good, buying the product.")
+		p.buy()
+		return
+	} else {
+		fmt.Println("Discount is not good, not buying the product.")
+		return
+	}
+}
+
 func main() {
-	var productName string = "Iphone"
-	var productPrice int = 10000
-	fmt.Println(productName, productPrice)
 
-	loops_demo()
-	arrays_demo()
-	maps_demo()
-	demo_pointers()
+	// p := Product{
+	// 	name:    "iPhone 15 Pro",
+	// 	price:   1000,
+	// 	company: "Apple Inc.",
+	// }
 
-	x, y := check_even_odd(10)
+	// // copyOfP := newProduct("Macbook", 20, "Apple")
 
-	fmt.Println(x, " and the return value is ", y)
+	// fun(p)
+
+	// fmt.Println("Product Name: ", p.name)
+
+	new_P := newProduct("iPhone 15 Pro", 1000, "Apple Inc.")
+	fmt.Println("Product Name: ", (*new_P).name)
+	fmt.Println("Product Price: ", new_P.price)
+	fmt.Println("Product Company: ", new_P.company)
+
+	fun_pass_by_ref(new_P)
+
+	fmt.Println("Product Name: ", new_P.name)
+	fmt.Println(new_P)
+
+	new_P.display(false)
+
+	check_discount_and_buy(new_P)
+
+	// var productName string = "Iphone"
+	// var productPrice int = 10000
+	// fmt.Println(productName, productPrice)
+
+	// loops_demo()
+	// arrays_demo()
+	// maps_demo()
+	// demo_pointers()
+
+	// x, y := check_even_odd(10)
+
+	// fmt.Println(x, " and the return value is ", y)
 }
 
 func loops_demo() {
