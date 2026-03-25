@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Product struct {
 	name    string
@@ -65,6 +67,10 @@ func check_discount_and_buy(p SellableProduct) {
 
 func main() {
 
+	c := NewComplex(1.0, 2.0)
+
+	fmt.Println(c)
+
 	// p := Product{
 	// 	name:    "iPhone 15 Pro",
 	// 	price:   1000,
@@ -77,19 +83,19 @@ func main() {
 
 	// fmt.Println("Product Name: ", p.name)
 
-	new_P := newProduct("iPhone 15 Pro", 1000, "Apple Inc.")
-	fmt.Println("Product Name: ", (*new_P).name)
-	fmt.Println("Product Price: ", new_P.price)
-	fmt.Println("Product Company: ", new_P.company)
+	// new_P := newProduct("iPhone 15 Pro", 1000, "Apple Inc.")
+	// fmt.Println("Product Name: ", (*new_P).name)
+	// fmt.Println("Product Price: ", new_P.price)
+	// fmt.Println("Product Company: ", new_P.company)
 
-	fun_pass_by_ref(new_P)
+	// fun_pass_by_ref(new_P)
 
-	fmt.Println("Product Name: ", new_P.name)
-	fmt.Println(new_P)
+	// fmt.Println("Product Name: ", new_P.name)
+	// fmt.Println(new_P)
 
-	new_P.display(false)
+	// new_P.display(false)
 
-	check_discount_and_buy(new_P)
+	// check_discount_and_buy(new_P)
 
 	// var productName string = "Iphone"
 	// var productPrice int = 10000
